@@ -29,7 +29,7 @@ public class ViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Προβολή Καταχώρησης");
+        getSupportActionBar().setTitle("View Experience");
 
         this.textDate = (TextView)this.findViewById(R.id.date);
         this.textExp1 = (TextView)this.findViewById(R.id.experience_1);
@@ -65,7 +65,7 @@ public class ViewActivity extends AppCompatActivity {
             MyDatabaseHelper db = new MyDatabaseHelper(this);
             db.deleteNote(note);
             MainActivity.noteList.remove(note);
-            Toast.makeText(getApplicationContext(), "Η καταχώρηση διαγράφηκε",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Experience was deleted",Toast.LENGTH_LONG).show();
             // Refresh ListView.
             MainActivity.listViewAdapter.notifyDataSetChanged();
 
@@ -96,9 +96,9 @@ public class ViewActivity extends AppCompatActivity {
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
         builder.setIcon(getApplicationInfo().loadIcon(getPackageManager()));
-        builder.setTitle("Έξοδος");
-        builder.setMessage("Είσαι σίγουρος πως θέλεις να κλείσεις την εφαρμογή;");
-        builder.setPositiveButton("ΝΑΙ", new DialogInterface.OnClickListener() {
+        builder.setTitle("Exit");
+        builder.setMessage("Are you sure you want to close the application?");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finish();
@@ -106,7 +106,7 @@ public class ViewActivity extends AppCompatActivity {
             }
 
         });
-        builder.setNegativeButton("ΟΧΙ", null);
+        builder.setNegativeButton("NO", null);
         builder.show();
     }
 

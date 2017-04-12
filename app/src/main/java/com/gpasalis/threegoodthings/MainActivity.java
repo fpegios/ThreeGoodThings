@@ -81,16 +81,16 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder =
                     new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
             builder.setIcon(getApplicationInfo().loadIcon(getPackageManager()));
-            builder.setTitle("Δεν υπάρχει καταχώρηση");
-            builder.setMessage("Θέλεις να προσθέσεις την πρώτη σου καταχώρηση;");
-            builder.setPositiveButton("ΝΑΙ", new DialogInterface.OnClickListener() {
+            builder.setTitle("Empty diary");
+            builder.setMessage("Do you want to write your first experience?");
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     createRecord();
                 }
 
             });
-            builder.setNegativeButton("ΟΧΙ", null);
+            builder.setNegativeButton("NO", null);
             builder.show();
         }
     }
@@ -113,16 +113,16 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder =
                     new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
             builder.setIcon(getApplicationInfo().loadIcon(getPackageManager()));
-            builder.setTitle("Διαγραφή όλων");
-            builder.setMessage("Είστε σίγουροι πως θέλετε να διαγράψετε όλες τις καταχωρήσεις;");
-            builder.setPositiveButton("ΝΑΙ", new DialogInterface.OnClickListener() {
+            builder.setTitle("Delete All");
+            builder.setMessage("Are you sure you want to delete all experiences?");
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     deleteAllRecords();
                 }
 
             });
-            builder.setNegativeButton("ΟΧΙ", null);
+            builder.setNegativeButton("NO", null);
             builder.show();
             return true;
         }
@@ -137,10 +137,10 @@ public class MainActivity extends AppCompatActivity {
         menu.setHeaderTitle("Επιλογές");
 
         // groupId, itemId, order, title
-        menu.add(0, MENU_ITEM_VIEW , 0, "Προβολή");
-        menu.add(0, MENU_ITEM_CREATE , 1, "Νέα Καταχώρηση");
-        menu.add(0, MENU_ITEM_EDIT , 2, "Επεξεργασία");
-        menu.add(0, MENU_ITEM_DELETE, 4, "Διαγραφή");
+        menu.add(0, MENU_ITEM_VIEW , 0, "View");
+        menu.add(0, MENU_ITEM_CREATE , 1, "New");
+        menu.add(0, MENU_ITEM_EDIT , 2, "Edit");
+        menu.add(0, MENU_ITEM_DELETE, 4, "Delete");
     }
 
     @Override
@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
         MyDatabaseHelper db = new MyDatabaseHelper(this);
         db.deleteNote(note);
         this.noteList.remove(note);
-        Toast.makeText(getApplicationContext(), "Η καταχώρηση διαγράφηκε",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Experience was deleted",Toast.LENGTH_LONG).show();
         // Refresh ListView.
         listViewAdapter.notifyDataSetChanged();
     }
@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
     private void deleteAllRecords() {
         MyDatabaseHelper db = new MyDatabaseHelper(this);
         db.deleteAllRecords();
-        Toast.makeText(getApplicationContext(), "Όλες οι καταχωρήσεις διαγράφηκαν",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "All experiences were deleted",Toast.LENGTH_LONG).show();
         // Refresh ListView.
         this.noteList.clear();
         List<Note> list=  db.getAllNotes();
@@ -223,9 +223,9 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
         builder.setIcon(getApplicationInfo().loadIcon(getPackageManager()));
-        builder.setTitle("Έξοδος");
-        builder.setMessage("Είσαι σίγουρος πως θέλεις να κλείσεις την εφαρμογή;");
-        builder.setPositiveButton("ΝΑΙ", new DialogInterface.OnClickListener() {
+        builder.setTitle("Exit");
+        builder.setMessage("Are you sure you want to close the application?");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finish();
@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-        builder.setNegativeButton("ΟΧΙ", null);
+        builder.setNegativeButton("NO", null);
         builder.show();
     }
 

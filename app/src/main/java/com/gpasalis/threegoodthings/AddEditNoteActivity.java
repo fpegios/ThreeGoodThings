@@ -46,10 +46,10 @@ public class AddEditNoteActivity extends AppCompatActivity {
         this.note = (Note) intent.getSerializableExtra("note");
         if(note == null)  {
             this.mode = MODE_CREATE;
-            getSupportActionBar().setTitle("Νέα Καταχώρηση");
+            getSupportActionBar().setTitle("New Experience");
         } else  {
             this.mode = MODE_EDIT;
-            getSupportActionBar().setTitle("Επεξεργασία Καταχώρησης");
+            getSupportActionBar().setTitle("Edit Experience");
             this.textDate.setText(note.getDate());
             this.textExp1.setText(note.getExp1());
             this.textExp2.setText(note.getExp2());
@@ -79,7 +79,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
         // Check all fields not to be empty
         if(date.equals("") || exp_1.equals("") || exp_2.equals("") || exp_3.equals("")) {
             Toast.makeText(getApplicationContext(),
-                    "Συμπλήρωσε όλα τα πεδία...", Toast.LENGTH_LONG).show();
+                    "Fill in all fields...", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -87,7 +87,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
         boolean isCorrectFormat = date.matches("\\d\\d\\-\\d\\d\\-\\d\\d\\d\\d");
         if (!isCorrectFormat) {
             Toast.makeText(getApplicationContext(),
-                    "Συμπλήρωσε την ημερομηνία με την εξής μορφή: ηη-μμ-εεεε", Toast.LENGTH_LONG).show();
+                    "Fill in the date with this format: dd-mm-yyyy", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -103,7 +103,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
 
         if (day <= 0 || day > 31 || month <= 0 || month > 12 || year <= 0){
             Toast.makeText(getApplicationContext(),
-                    "Λανθασμένη ημερομηνία!", Toast.LENGTH_LONG).show();
+                    "Wrong Date!", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -112,13 +112,13 @@ public class AddEditNoteActivity extends AppCompatActivity {
         if (mode == MODE_CREATE) {
             if (db.sameDateExists(date)) {
                 Toast.makeText(getApplicationContext(),
-                        "Η ημερομηνία " + date + " είναι ήδη καταχωρημένη. Δήλωσε διαφορετική ημερομηνία.", Toast.LENGTH_LONG).show();
+                        "There is another experience in" + date + ". Choose different date.", Toast.LENGTH_LONG).show();
                 return;
             }
         } else {
             if (!date.equals(note.getDate()) && db.sameDateExists(date) ){
                 Toast.makeText(getApplicationContext(),
-                        "Η ημερομηνία " + date + " είναι ήδη καταχωρημένη. Δήλωσε διαφορετική ημερομηνία.", Toast.LENGTH_LONG).show();
+                        "here is another experience in" + date + ". Choose different date.", Toast.LENGTH_LONG).show();
                 return;
             }
         }
@@ -133,7 +133,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
             this.note.setExp2(exp_2);
             this.note.setExp3(exp_3);
             db.updateNote(note);
-            Toast.makeText(getApplicationContext(), "Η καταχώρηση ενημερώθηκε",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Experience updated",Toast.LENGTH_LONG).show();
         }
 
         this.needRefresh = true;
